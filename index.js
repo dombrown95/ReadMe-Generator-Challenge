@@ -39,7 +39,7 @@ const questions = [
     {
       type: 'input',
       name: 'tests',
-      message: 'How can others run test for your project?', 
+      message: 'How can others run tests for your project?', 
     },
     {
       type: 'input',
@@ -63,10 +63,14 @@ const questions = [
   
   // function to initialize program
   function init() {
-    inquirer.prompt(questions, function (answers) {
+    inquirer.prompt(questions)
+      .then((answers) => {
         const readmeContent = generateMarkdown(answers);
         writeToFile('README.md', readmeContent);
-    });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
   
   // function call to initialize program
